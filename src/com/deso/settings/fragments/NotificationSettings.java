@@ -16,26 +16,35 @@
 
 package com.deso.settings.fragments;
 
+import android.content.Context;
 import android.content.ContentResolver;
-import android.content.res.Resources;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.os.UserHandle;
-import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceScreen;
-import android.support.v7.preference.PreferenceCategory;
+import android.support.v7.preference.PreferenceGroup;
+import android.support.v14.preference.SwitchPreference;
 import android.provider.Settings;
+import android.provider.Settings.SettingNotFoundException; 
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
-public class NotificationSettings extends DesoSettingsFragment {
+public class NotificationSettings extends DesoSettingsFragment implements OnPreferenceChangeListener {
+
+    private static final String MISSED_CALL_BREATH = "missed_call_breath";
+    private static final String VOICEMAIL_BREATH = "voicemail_breath";
+    private static final String SMS_BREATH = "sms_breath";
 
     private Preference mLeds;
     private Preference mChargingLeds;
     private Preference mNotificationLeds;
+    private SwitchPreference mMissedCallBreath;
+    private SwitchPreference mVoicemailBreath;
+    private SwitchPreference mSmsBreath;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,10 +52,38 @@ public class NotificationSettings extends DesoSettingsFragment {
         addPreferencesFromResource(R.xml.notification_drawer_settings);
         title = getResources().getString(R.string.notification_drawer_settings_title);
         PreferenceScreen prefScreen = getPreferenceScreen();
+        ContentResolver resolver = getActivity().getContentResolver();
+
 
         mChargingLeds = (Preference) findPreference("charging_light");
         mNotificationLeds = (Preference) findPreference("notification_light");
         mLeds = (Preference) findPreference("deso_leds");
+        mMissedCallBreath = (SwitchPreference) findPreference(MISSED_CALL_BREATH);
+        mVoicemailBreath = (SwitchPreference) findPreference(VOICEMAIL_BREATH);
+        mSmsBreath = (SwitchPreference) findPreference(SMS_BREATH);
+
+        Context context = getActivity();
+        ConnectivityManager cm = (ConnectivityManager)
+                context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if(cm.isNetworkSupported(ConnectivityManager.TYPE_MOBILE)) {
+
+            mMissedCallBreath.setChecked(Settings.System.getInt(resolver,
+                    Settings.System.KEY_MISSED_CALL_BREATH, 0) == 1);
+            mMissedCallBreath.setOnPreferenceChangeListener(this);
+
+            mVoicemailBreath.setChecked(Settings.System.getInt(resolver,
+                    Settings.System.KEY_VOICEMAIL_BREATH, 0) == 1);
+            mVoicemailBreath.setOnPreferenceChangeListener(this);
+
+            mSmsBreath.setChecked(Settings.Global.getInt(resolver,
+                    Settings.Global.KEY_SMS_BREATH, 0) == 1);
+            mSmsBreath.setOnPreferenceChangeListener(this);
+        } else {
+            prefScreen.removePreference(mMissedCallBreath);
+            prefScreen.removePreference(mVoicemailBreath);
+            prefScreen.removePreference(mSmsBreath);
+        }
 
         if (mChargingLeds == null && mNotificationLeds == null) {
             prefScreen.removePreference(mLeds);
@@ -62,6 +99,31 @@ public class NotificationSettings extends DesoSettingsFragment {
             prefScreen.removePreference(mNotificationLeds);
         }
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (preference == mMissedCallBreath) {
+            boolean value = (Boolean) newValue;
+            Settings.System.putInt(getContentResolver(), MISSED_CALL_BREATH,
+                    value ? 1 : 0);
+            return true;
+        } else if (preference == mVoicemailBreath) {
+            boolean value = (Boolean) newValue;
+            Settings.System.putInt(getContentResolver(), VOICEMAIL_BREATH,
+                    value ? 1 : 0);
+            return true;
+        } else if (preference == mSmsBreath) {
+            boolean value = (Boolean) newValue;
+            Settings.Global.putInt(getContentResolver(), SMS_BREATH,
+                    value ? 1 : 0);
+            return true;
+        }
+       return false;
     }
 
     @Override
