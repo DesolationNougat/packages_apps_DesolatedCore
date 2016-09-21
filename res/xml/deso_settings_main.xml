@@ -23,11 +23,12 @@
             android:key="deso_statusbar_settings"
             android:title="@string/statusbar_settings_title"/>
 
-<!--  Update this line as we complete them
     <PreferenceScreen
             android:fragment="com.deso.settings.tabs.NavTab"
             android:key="deso_statusbar_settings"
             android:title="@string/statusbar_settings_title"/>
+
+<!--  Update this line as we complete them
 
     <PreferenceScreen
             android:fragment="com.deso.settings.tabs.QSPanelTab"

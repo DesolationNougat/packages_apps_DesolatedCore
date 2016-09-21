@@ -39,7 +39,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 
-import com.deso.settings.fragments.StatusBarSettings;
+import com.deso.settings.fragments.NavbarSettings;
+import com.deso.settings.fragments.ButtonSettings;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.SettingsPreferenceFragment;
@@ -81,7 +82,8 @@ public class NavTab extends SettingsPreferenceFragment {
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
-            frags[0] = new StatusBarSettings();
+            frags[0] = new NavBarSettings();
+            frags[1] = new ButtonSettings();
         }
 
         @Override
@@ -103,8 +105,8 @@ public class NavTab extends SettingsPreferenceFragment {
     private String[] getTitles() {
         String titleString[];
         titleString = new String[]{
-                getString(R.string.statusbar_settings_title)};
-
+                getString(R.string.navigationbar_settings_title),
+                getString(R.string.button_settings)};
         return titleString;
     }
 
