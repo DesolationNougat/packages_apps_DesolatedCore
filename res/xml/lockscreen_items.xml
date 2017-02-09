@@ -28,6 +28,13 @@
         android:title="@string/lockscreen_visualizer_title"
         android:defaultValue="true"/>
 
+    <com.android.settings.preference.SystemSettingSwitchPreference
+        android:key="show_emergency_button"
+        android:title="@string/emergency_button_title"
+        android:summaryOn="@string/emergency_button_summary_on"
+        android:summaryOff="@string/emergency_button_summary_off"
+        android:defaultValue="true" />
+
     <!-- Lockscreen weather -->
     <PreferenceCategory
         android:key="lock_screen_weather_category"
