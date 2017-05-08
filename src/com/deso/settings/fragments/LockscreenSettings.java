@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Flash ROM
+ * Copyright (C) 2017 Desolation ROM
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,18 +22,14 @@ import android.support.v7.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
-public class StatusBarSettings extends SettingsPreferenceFragment {
+public class LockscreenSettings extends SettingsPreferenceFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.statusbar_settings);
-        final PreferenceScreen prefScreen = getPreferenceScreen();
+        title = getResources().getString(R.string.lockscreen_settings_title);
+        addPreferencesFromResource(R.xml.lockscreen_settings);
     }
 
-    @Override
-    protected int getMetricsCategory() {
-        return MetricsEvent.DESO;
-    }
 }
 
