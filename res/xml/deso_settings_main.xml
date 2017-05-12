@@ -41,17 +41,17 @@
             android:title="@string/statusbar_settings_title"/>
 
     <PreferenceScreen
-            android:fragment="com.deso.settings.tabs.Recents"
-            android:key="deso_statusbar_settings"
-            android:title="@string/statusbar_settings_title"/>
-
-    <PreferenceScreen
             android:fragment="com.deso.settings.tabs.Misc"
             android:key="deso_statusbar_settings"
             android:title="@string/statusbar_settings_title"/> -->
 
+    <PreferenceScreen
+            android:fragment="com.deso.settings.fragments.RecentsSettings"
+            android:key="deso_recents_settings"
+            android:title="@string/recents_settings_title"/>
 
 <!-- TODO: These sections will be moved later -->
+
     <PreferenceScreen
             android:fragment="com.deso.settings.fragments.LedSettings"
             android:key="deso_leds"
