@@ -41,6 +41,7 @@ import android.widget.Toast;
 
 import com.deso.settings.fragments.NavbarSettings;
 import com.deso.settings.fragments.ButtonSettings;
+import com.deso.settings.fragments.FlingSettings;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.SettingsPreferenceFragment;
@@ -84,6 +85,7 @@ public class NavTab extends SettingsPreferenceFragment {
             super(fm);
             frags[0] = new NavBarSettings();
             frags[1] = new ButtonSettings();
+            frags[2] = new FlingSettings();
         }
 
         @Override
@@ -106,7 +108,8 @@ public class NavTab extends SettingsPreferenceFragment {
         String titleString[];
         titleString = new String[]{
                 getString(R.string.navigationbar_settings_title),
-                getString(R.string.button_settings)};
+                getString(R.string.button_settings),
+                getString(R.string.pulse_settings)};
         return titleString;
     }
 
