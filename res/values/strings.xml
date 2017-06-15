@@ -1179,5 +1179,8 @@
     <string name="sms_breath_title">Breathing SMS</string>
     <string name="sms_breath_summary">Will give your SMS notifications a breathing effect in the statusbar</string>
 
+    <!-- ANBI -->
+    <string name="anbi_title">Accidental touch</string>
+    <string name="anbi_summary">Prevent interaction with navigation buttons while the screen is being touched</string>
 </resources>
 

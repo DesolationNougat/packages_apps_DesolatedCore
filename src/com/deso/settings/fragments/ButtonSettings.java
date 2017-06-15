@@ -51,7 +51,8 @@ public class ButtonSettings extends ActionFragment implements OnPreferenceChange
     private static final String VOLUME_ROCKER_WAKE = "volume_rocker_wake";
     public static final String VOLUME_ROCKER_MUSIC_CONTROLS = "volume_rocker_music_controls";
     private static final String WIRED_RINGTONE_FOCUS_MODE = "wired_ringtone_focus_mode";
-
+    private static final String KEY_ANBI = "anbi";
+    private static final String ANBI_ENABLED = "anbi_enabled";
 
     // category keys
     private static final String CATEGORY_HWKEY = "hardware_keys";
@@ -80,6 +81,7 @@ public class ButtonSettings extends ActionFragment implements OnPreferenceChange
     private SwitchPreference mHwKeyDisable;
     private ListPreference mBacklightTimeout;
     private CustomSeekBarPreference mButtonBrightness;
+    private SwitchPreference mAnbiPreference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -132,6 +134,8 @@ public class ButtonSettings extends ActionFragment implements OnPreferenceChange
         mButtonBrightness =
                 (CustomSeekBarPreference) findPreference(KEY_BUTTON_BRIGHTNESS);
 
+        mAnbiPreference = (SwitchPreference) findPreference(KEY_ANBI);
+
         // back key
         if (!hasBackKey) {
             prefScreen.removePreference(backCategory);
@@ -165,6 +169,11 @@ public class ButtonSettings extends ActionFragment implements OnPreferenceChange
                         Settings.System.BUTTON_BACKLIGHT_TIMEOUT, 5000);
                 mBacklightTimeout.setValue(Integer.toString(BacklightTimeout));
                 mBacklightTimeout.setSummary(mBacklightTimeout.getEntry());
+
+                mAnbiPreference.setOnPreferenceChangeListener(this);
+                int anbivalue = Settings.System.getIntForUser(resolver, ANBI_ENABLED, 0, UserHandle.USER_CURRENT);;
+                mAnbiPreference.setChecked(anbivalue != 0);
+
             }
 
             if (mButtonBrightness != null) {
@@ -176,6 +185,7 @@ public class ButtonSettings extends ActionFragment implements OnPreferenceChange
         } else {
             prefScreen.removePreference(hwkeyCat);
         }
+
 
         mSwapVolumeButtons = (SwitchPreference) findPreference(SWAP_VOLUME_BUTTONS);
         mSwapVolumeButtons.setOnPreferenceChangeListener(this);
@@ -226,6 +236,11 @@ public class ButtonSettings extends ActionFragment implements OnPreferenceChange
         if (preference == mSwapVolumeButtons) {
             boolean value = (Boolean) newValue;
             Settings.System.putIntForUser(resolver, SWAP_VOLUME_BUTTONS,
+                    value ? 1 : 0, UserHandle.USER_CURRENT);
+            return true;
+        } else if (preference == mAnbiPreference) {
+            boolean value = (Boolean) newValue;
+            Settings.System.putIntForUser(resolver, ANBI_ENABLED,
                     value ? 1 : 0, UserHandle.USER_CURRENT);
             return true;
         } else if (preference == mVolumeRockerWake) {
