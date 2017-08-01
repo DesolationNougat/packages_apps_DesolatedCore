@@ -19,7 +19,7 @@
         android:title="@string/deso_settings_title" >
 
     <PreferenceScreen
-            android:fragment="com.deso.settings.fragments.StatusBarSettings"
+            android:fragment="com.deso.settings.tabs.StatusBarTab"
             android:key="deso_statusbar_settings"
             android:title="@string/statusbar_settings_title"/>
 
