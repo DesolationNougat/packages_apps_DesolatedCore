@@ -38,6 +38,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.deso.settings.fragments.StatusBarSettings;
 import com.deso.settings.fragments.ClockSettings;
 
 
@@ -81,7 +82,8 @@ public class StatusbarTab extends SettingsPreferenceFragment {
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
-            frags[0] = new ClockSettings();
+            frags[0] = new StatusBarSettings();
+            frags[1] = new ClockSettings();
         }
 
         @Override
@@ -103,6 +105,7 @@ public class StatusbarTab extends SettingsPreferenceFragment {
     private String[] getTitles() {
         String titleString[];
         titleString = new String[]{
+                getString(R.string.statusbar_settings_title),
                 getString(R.string.clock_settings_title)};
 
         return titleString;
