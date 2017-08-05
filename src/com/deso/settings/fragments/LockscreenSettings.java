@@ -47,14 +47,16 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements On
     private static final String LOCKSCREEN_PREF = "ls_preferences";
     private static final String LOCKSCREEN_MAX_NOTIF_CONFIG = "lockscreen_max_notif_config";
     private static final String LOCK_QS_DISABLED = "lockscreen_qs_disabled";
-    private static final String PREF_LOCKSCREEN_SHORTCUTS_LONGPRESS = "lockscreen_shortcuts_longpress";
+    /* TODO: Disabled for now until fixed
+    private static final String PREF_LOCKSCREEN_SHORTCUTS_LONGPRESS = "lockscreen_shortcuts_longpress"; */
 
     private Context mContext;
     private CustomSeekBarPreference mMaxKeyguardNotifConfig;
     private Preference mLockscreenColorsReset;
     private FingerprintManager mFPMgr;
     private SecureSettingSwitchPreference mLockQSDisabled;
-    private SwitchPreference mLockscreenShortcutsLongpress;
+    /* TODO: Disabled for now until fixed
+    private SwitchPreference mLockscreenShortcutsLongpress;*/
 
 
     @Override
@@ -77,11 +79,12 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements On
         mMaxKeyguardNotifConfig.setValue(kgconf);
         mMaxKeyguardNotifConfig.setOnPreferenceChangeListener(this);
 
+        /* TODO: Disabled for now until fixed
         mLockscreenShortcutsLongpress = (SwitchPreference) findPreference(
                 PREF_LOCKSCREEN_SHORTCUTS_LONGPRESS);
         mLockscreenShortcutsLongpress.setChecked(Settings.System.getInt(getContentResolver(),
                 Settings.System.LOCKSCREEN_SHORTCUTS_LONGPRESS, 1) == 1);
-        mLockscreenShortcutsLongpress.setOnPreferenceChangeListener(this);
+        mLockscreenShortcutsLongpress.setOnPreferenceChangeListener(this);*/
 
         if (!mFPMgr.isHardwareDetected()){
             mLSPrefScreen.removePreference(mFpCategory);
@@ -102,11 +105,12 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements On
         } else if (preference == mLockQSDisabled) {
             Helpers.restartSystemUI(mContext);
             return true;
+        /* TODO: Disabled for now until fixed
         } else if (preference == mLockscreenShortcutsLongpress) {
             Settings.System.putInt(getContentResolver(),
                     Settings.System.LOCKSCREEN_SHORTCUTS_LONGPRESS,
                     (Boolean) newValue ? 1 : 0);
-            return true;
+            return true;*/
         }
         return false;
     }
