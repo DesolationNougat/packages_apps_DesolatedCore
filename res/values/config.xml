@@ -24,4 +24,7 @@
     <!-- Whether device has hardware buttons -->
     <bool name="config_has_hardware_buttons">false</bool>
 
+    <!-- When true enable fingerprint quick pulldown  setting. -->
+    <bool name="config_enableFPpulldown">false</bool>
+
 </resources>

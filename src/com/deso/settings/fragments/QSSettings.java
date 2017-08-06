@@ -21,7 +21,6 @@ import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -66,7 +65,6 @@ public class QSSettings extends DesoSettingsFragment implements
     private ListPreference mQuickPulldown;
     private ListPreference mSmartPulldown;
     private ListPreference mHeaderClock;
-    private FingerprintManager mFPMgr;
     private SystemSettingSwitchPreference mFPPulldown;
 
     @Override
@@ -145,9 +143,8 @@ public class QSSettings extends DesoSettingsFragment implements
         mHeaderClock.setValue(String.valueOf(headerClockValue));
 
         mFPPulldown = (SystemSettingSwitchPreference) findPreference(STATUS_BAR_QUICK_QS_PULLDOWN_FP);
-        mFPMgr = (FingerprintManager) getActivity().getSystemService(Context.FINGERPRINT_SERVICE);
 
-        if (!mFPMgr.isHardwareDetected()){
+        if (!(getResources().getBoolean(R.bool.config_enableFPpulldown))){
             getPreferenceScreen().removePreference(mFPPulldown);
         }
 
