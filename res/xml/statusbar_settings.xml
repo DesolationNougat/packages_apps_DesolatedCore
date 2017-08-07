@@ -31,6 +31,11 @@
         android:title="@string/status_bar_notif_count_title"
         android:summary="@string/status_bar_notif_count_summary" />
 
+    <com.android.settings.preference.SystemSettingSwitchPreference
+        android:key="carrier_signal_toggle"
+        android:title="@string/carrier_signal_toggle_title"
+        android:summary="@string/carrier_signal_toggle_summary" />
+
     <PreferenceScreen
             android:title="@string/status_bar_icon_blacklist_title"
             android:summary="@string/status_bar_icon_blacklist_summary">

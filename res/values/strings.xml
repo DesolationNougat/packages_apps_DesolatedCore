@@ -1166,5 +1166,8 @@
     <string name="one_handed_mode_title">One handed mode</string>
     <string name="one_handed_mode_summary">Allows swiping on the navigation bar to enable one handed mode</string>
 
+    <string name="carrier_signal_toggle_title">Signal indicator</string>
+    <string name="carrier_signal_toggle_summary">Hide/Show carrier signal/arrows indicator</string>
+
 </resources>
 
