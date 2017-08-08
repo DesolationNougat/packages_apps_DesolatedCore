@@ -1168,6 +1168,7 @@
 
     <string name="carrier_signal_toggle_title">Signal indicator</string>
     <string name="carrier_signal_toggle_summary">Hide/Show carrier signal/arrows indicator</string>
+    <string name="display_lockscreen_rotation_title">Rotate lock screen</string>
 
 </resources>
 
