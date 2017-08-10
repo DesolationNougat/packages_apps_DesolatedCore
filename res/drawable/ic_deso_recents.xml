@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:tint="?android:attr/colorAccent"
+    android:viewportWidth="512"
+    android:viewportHeight="512"
+    android:width="24dp"
+    android:height="24dp">
+    <group
+        android:translateX="-570"
+        android:translateY="-740">
+        <path
+            android:pathData="M1050 772l-241.2 0 0 86.2 155.1 0 0 155.1 86.2 0 0 -241.3zm-103.4 103.4l-241.2 0 0 86.2 155.1 0 0 155.1 86.2 0 0 -241.3zM602 978.8l241.2 0 0 241.2 -241.2 0 0 -241.2z"
+            android:fillColor="@*android:color/accent_material_dark" />
+    </group>
+</vector>
