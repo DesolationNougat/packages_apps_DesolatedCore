@@ -31,16 +31,16 @@
             android:title="@string/navigationbar_settings_title"/>
 
     <PreferenceScreen
-            android:fragment="com.deso.settings.tabs.MiscTab"
-            android:key="deso_misc_settings"
-            android:icon="@drawable/ic_deso_misc"
-            android:title="@string/misc_settings_title"/>
-
-    <PreferenceScreen
             android:fragment="com.deso.settings.tabs.LSTab"
             android:key="deso_lockscreen_settings"
             android:icon="@drawable/ic_deso_lockscreen"
             android:title="@string/lockscreen_settings_title"/>
+
+    <PreferenceScreen
+            android:fragment="com.deso.settings.tabs.MiscTab"
+            android:key="deso_misc_settings"
+            android:icon="@drawable/ic_deso_misc"
+            android:title="@string/misc_settings_title"/>
 
     <PreferenceScreen
             android:fragment="com.deso.settings.tabs.NotifTab"
