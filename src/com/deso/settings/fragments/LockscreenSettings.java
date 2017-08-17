@@ -36,6 +36,7 @@ import android.view.MenuInflater;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.preference.SecureSettingSwitchPreference;
+import com.android.settings.preference.SystemSettingSwitchPreference;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.deso.settings.preferences.CustomSeekBarPreference;
 
@@ -47,6 +48,7 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements On
     private static final String LOCKSCREEN_PREF = "ls_preferences";
     private static final String LOCKSCREEN_MAX_NOTIF_CONFIG = "lockscreen_max_notif_config";
     private static final String LOCK_QS_DISABLED = "lockscreen_qs_disabled";
+    private static final String POWER_MENU_LOCKSCREEN = "power_menu_lockscreen";
     /* TODO: Disabled for now until fixed
     private static final String PREF_LOCKSCREEN_SHORTCUTS_LONGPRESS = "lockscreen_shortcuts_longpress"; */
 
@@ -55,6 +57,7 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements On
     private Preference mLockscreenColorsReset;
     private FingerprintManager mFPMgr;
     private SecureSettingSwitchPreference mLockQSDisabled;
+    private SystemSettingSwitchPreference mLockPowerMenu;
     /* TODO: Disabled for now until fixed
     private SwitchPreference mLockscreenShortcutsLongpress;*/
 
@@ -92,6 +95,9 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements On
         mLockQSDisabled = (SecureSettingSwitchPreference) findPreference(LOCK_QS_DISABLED);
         mLockQSDisabled.setOnPreferenceChangeListener(this);
 
+        mLockPowerMenu = (SystemSettingSwitchPreference) findPreference(POWER_MENU_LOCKSCREEN);
+        mLockPowerMenu.setOnPreferenceChangeListener(this);
+
         setHasOptionsMenu(true);
     }
 
@@ -104,6 +110,16 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements On
             return true;
         } else if (preference == mLockQSDisabled) {
             Helpers.restartSystemUI(mContext);
+            boolean powerLockNoQS = (Boolean) newValue;
+            mLockPowerMenu.setChecked(((Boolean) powerLockNoQS ? 0 : 1) == 1);
+            mLockPowerMenu.setEnabled(((Boolean) powerLockNoQS ? 0 : 1) == 1);
+            return true;
+        } else if (preference == mLockPowerMenu) {
+            boolean powerLockval = (Boolean) newValue;
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.POWER_MENU_LOCKSCREEN,
+                    (Boolean) powerLockval ? 1 : 0);
+            mLockPowerMenu.setChecked(((Boolean) powerLockval ? 1 : 0) == 1);
             return true;
         /* TODO: Disabled for now until fixed
         } else if (preference == mLockscreenShortcutsLongpress) {
