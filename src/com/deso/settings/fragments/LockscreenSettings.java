@@ -15,12 +15,12 @@
  */
 
 package com.deso.settings.fragments;
+
 import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.hardware.fingerprint.FingerprintManager;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
@@ -49,7 +49,6 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements On
     private static final String LOCKSCREEN_MAX_NOTIF_CONFIG = "lockscreen_max_notif_config";
     private static final String LOCK_QS_DISABLED = "lockscreen_qs_disabled";
     private static final String POWER_MENU_LOCKSCREEN = "power_menu_lockscreen";
-    private static final String SHOW_EMERGENCY_BUTTON = "show_emergency_button";
     /* TODO: Disabled for now until fixed
     private static final String PREF_LOCKSCREEN_SHORTCUTS_LONGPRESS = "lockscreen_shortcuts_longpress"; */
 
@@ -59,7 +58,6 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements On
     private FingerprintManager mFPMgr;
     private SecureSettingSwitchPreference mLockQSDisabled;
     private SystemSettingSwitchPreference mLockPowerMenu;
-    private SystemSettingSwitchPreference mEmergency;
     /* TODO: Disabled for now until fixed
     private SwitchPreference mLockscreenShortcutsLongpress;*/
 
@@ -77,8 +75,6 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements On
         PreferenceCategory mFpCategory = (PreferenceCategory) findPreference(LOCKSCREEN_FP_CATEGORY);
 
         mFPMgr = (FingerprintManager) getActivity().getSystemService(Context.FINGERPRINT_SERVICE);
-        ConnectivityManager  cm = (ConnectivityManager)
-                getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
 
         mMaxKeyguardNotifConfig = (CustomSeekBarPreference) findPreference(LOCKSCREEN_MAX_NOTIF_CONFIG);
         int kgconf = Settings.System.getInt(getContentResolver(),
@@ -93,23 +89,14 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements On
                 Settings.System.LOCKSCREEN_SHORTCUTS_LONGPRESS, 1) == 1);
         mLockscreenShortcutsLongpress.setOnPreferenceChangeListener(this);*/
 
-
-        mEmergency = (SystemSettingSwitchPreference) findPreference(SHOW_EMERGENCY_BUTTON);
-        mEmergency.setOnPreferenceChangeListener(this);
-
+        if (!mFPMgr.isHardwareDetected()){
+            mLSPrefScreen.removePreference(mFpCategory);
+        }
         mLockQSDisabled = (SecureSettingSwitchPreference) findPreference(LOCK_QS_DISABLED);
         mLockQSDisabled.setOnPreferenceChangeListener(this);
 
         mLockPowerMenu = (SystemSettingSwitchPreference) findPreference(POWER_MENU_LOCKSCREEN);
         mLockPowerMenu.setOnPreferenceChangeListener(this);
-
-        if (!mFPMgr.isHardwareDetected()){
-            mLSPrefScreen.removePreference(mFpCategory);
-        }
-
-        if(!cm.isNetworkSupported(ConnectivityManager.TYPE_MOBILE)) {
-            mLSPrefScreen.removePreference(mEmergency);
-        }
 
         setHasOptionsMenu(true);
     }
