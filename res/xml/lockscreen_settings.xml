@@ -39,7 +39,8 @@
 
     <com.android.settings.preference.SystemSettingSwitchPreference
         android:key="show_emergency_button"
-        android:title="@string/emergency_button_title" />
+        android:title="@string/emergency_button_title"
+        android:defaultValue="true" />
 
     <com.android.settings.preference.SystemSettingSwitchPreference
         android:key="power_menu_lockscreen"
