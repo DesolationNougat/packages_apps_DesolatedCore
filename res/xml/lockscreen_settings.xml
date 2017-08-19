@@ -34,7 +34,8 @@
 
     <com.android.settings.preference.SystemSettingSwitchPreference
         android:key="lockscreen_rotation"
-        android:title="@string/display_lockscreen_rotation_title" />
+        android:title="@string/display_lockscreen_rotation_title"
+        android:defaultValue="true" />
 
     <com.android.settings.preference.SystemSettingSwitchPreference
         android:key="show_emergency_button"
