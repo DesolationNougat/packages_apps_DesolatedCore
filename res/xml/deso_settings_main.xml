@@ -18,11 +18,11 @@
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
         android:title="@string/deso_settings_title" >
 
-    <PreferenceScreen
+<!--    <PreferenceScreen
             android:key="blur_category"
             android:title="@string/blur_settings"
             android:icon="@drawable/ic_deso_blur"
-            android:fragment="com.deso.settings.fragments.BlurPersonalizations" />
+            android:fragment="com.deso.settings.fragments.BlurPersonalizations" /> -->
 
     <PreferenceScreen
             android:fragment="com.deso.settings.tabs.NavTab"
