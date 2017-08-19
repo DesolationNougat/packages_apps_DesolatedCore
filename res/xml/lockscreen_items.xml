@@ -28,6 +28,35 @@
         android:title="@string/lockscreen_visualizer_title"
         android:defaultValue="true"/>
 
+    <!-- Lockscreen weather -->
+    <PreferenceCategory
+        android:key="lock_screen_weather_category"
+        android:title="@string/lock_screen_weather_category_title" >
+
+        <com.android.settings.preference.SystemSettingSwitchPreference
+            android:key="lock_screen_show_weather"
+            android:title="@string/lock_screen_show_weather_title"
+            android:summaryOn="@string/lock_screen_show_weather_summaryOn"
+            android:summaryOff="@string/lock_screen_show_weather_summaryOff" />
+
+        <com.android.settings.preference.SystemSettingSwitchPreference
+            android:key="lock_screen_show_weather_location"
+            android:title="@string/lock_screen_show_location_title"
+            android:summaryOn="@string/lock_screen_show_location_summaryOn"
+            android:summaryOff="@string/lock_screen_show_location_summaryOff"
+            android:defaultValue="true"
+            android:dependency="lock_screen_show_weather" />
+
+        <com.android.settings.preference.SystemSettingSwitchPreference
+            android:key="lock_screen_weather_condition_icon"
+            android:title="@string/lock_screen_weather_condition_icon_title"
+            android:summaryOn="@string/lock_screen_weather_condition_icon_summaryOn"
+            android:summaryOff="@string/lock_screen_weather_condition_icon_summaryOff"
+            android:defaultValue="true"
+            android:dependency="lock_screen_show_weather" />
+
+    </PreferenceCategory>
+
     <PreferenceCategory
         android:key="hide_lockscreen_items_category"
         android:title="@string/hide_lockscreen_items_title" />
