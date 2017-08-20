@@ -31,6 +31,7 @@ import android.provider.Settings;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.internal.util.deso.Helpers;
 
 import com.android.settings.R;
 
@@ -42,10 +43,13 @@ public class LockscreenItems extends SettingsPreferenceFragment implements OnPre
 
     private static final int MY_USER_ID = UserHandle.myUserId();
 
+    private Context mContext;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.lockscreen_items);
+        mContext = getActivity().getApplicationContext();
 
         final ContentResolver resolver = getActivity().getContentResolver();
         final PreferenceScreen prefSet = getPreferenceScreen();
@@ -68,7 +72,8 @@ public class LockscreenItems extends SettingsPreferenceFragment implements OnPre
         if  (preference == mEmergencyButton) {
             boolean checked = ((SwitchPreference)preference).isChecked();
             Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.SHOW_EMERGENCY_BUTTON, checked ? 1:0);
+                    Settings.System.SHOW_EMERGENCY_BUTTON, checked ? 0:1);
+            Helpers.restartSystemUI(mContext);
             return true;
         }
         return false;
