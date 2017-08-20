@@ -28,7 +28,7 @@
         android:title="@string/lockscreen_visualizer_title"
         android:defaultValue="true"/>
 
-    <com.android.settings.preference.SystemSettingSwitchPreference
+    <SwitchPreference
         android:key="show_emergency_button"
         android:title="@string/emergency_button_title"
         android:summaryOn="@string/emergency_button_summary_on"
