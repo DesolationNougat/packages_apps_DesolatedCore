@@ -52,13 +52,9 @@ public class LockscreenItems extends SettingsPreferenceFragment implements OnPre
         final LockPatternUtils lockPatternUtils = new LockPatternUtils(getActivity());
 
         mEmergencyButton = (SwitchPreference) findPreference(PREF_SHOW_EMERGENCY_BUTTON);
-        if (lockPatternUtils.isSecure(MY_USER_ID)) {
             mEmergencyButton.setChecked((Settings.System.getInt(resolver,
                 Settings.System.SHOW_EMERGENCY_BUTTON, 1) == 1));
             mEmergencyButton.setOnPreferenceChangeListener(this);
-        } else {
-            prefSet.removePreference(mEmergencyButton);
-        }
 
     }
 
