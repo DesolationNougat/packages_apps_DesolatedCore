@@ -26,7 +26,6 @@
 
     <string name="misc_settings_title">Miscellaneous</string>
     <string name="immersive_messages_title">Disable Immersive Messages</string>
-    <string name="expanded_notifications_title">Force Expand Notifications</string>
 
     <!-- Notification Count in Statusbar -->
     <string name="status_bar_notif_count_title">Show notification count</string>

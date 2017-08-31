@@ -15,7 +15,6 @@
 <resources>
   <string name="misc_settings_title">Ostatní</string>
   <string name="immersive_messages_title">Zakázat zprávy pohlcujícího režimu (immersive mód)</string>
-  <string name="expanded_notifications_title">Vynutit rozšířené oznámení</string>
   <!-- Notification Count in Statusbar -->
   <string name="status_bar_notif_count_title">Zobrazit počet oznámení</string>
   <string name="status_bar_notif_count_summary">Zobrazí počet nezobrazených upozornění v oznamovací oblasti</string>

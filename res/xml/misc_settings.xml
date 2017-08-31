@@ -20,10 +20,6 @@
         android:key="disable_immersive_message"
         android:title="@string/immersive_messages_title" />
 
-    <com.android.settings.preference.SystemSettingSwitchPreference
-        android:key="force_expanded_notifications"
-        android:title="@string/expanded_notifications_title" />
-
     <ListPreference
         android:key="pref_scrollingcache"
         android:dialogTitle="@string/pref_scrollingcache_title"
